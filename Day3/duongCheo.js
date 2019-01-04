@@ -20,3 +20,24 @@ function duongCheo(array) {
 }
 
 console.log(duongCheo([ [1, 2, 3],[4, 5, 6],[7, 8, 9]]));
+
+//
+function duongCheo2(squareMatrix) {
+    let result = [];
+    for (let i = 0; i < squareMatrix.length * 2 - 1; i++) {
+        result[i] = [];
+    }
+    for (let i = 0; i < squareMatrix.length; i++) {
+        for (let j = 0; j < squareMatrix.length; j++) {
+            for (let k = 0; k < result.length; k++) {
+                if ((i + j) === k) {
+                    result[k].push(squareMatrix[i][j])
+                }
+            }
+        }
+        
+    }
+    return result;
+}
+
+console.log(duongCheo2([ [1, 2, 3],[4, 5, 6],[7, 8, 9]]));
