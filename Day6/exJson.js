@@ -99,7 +99,37 @@ function reduce2(array, function2, firstValue) {
     return returnResult;
 }
 
+function add(a, b) {
+    return a + b;
+}
+console.log(reduce2([1, 2, 3, 4, 5, 6], add, 5));
+
 /* Exercise 10 */
+//map
+function map3(array, callbackFunction) {
+    return reduce2(array, callbackFunction, []);
+}
 
+//filter
+function filter3(array, callbackFunction) {
+    return reduce2(array, callbackFunction, []);
+}
 
+/* Exercise 11 */
 
+// sum
+function sum(arr) {
+    const result = arr.reduce((accumulator, currentVal) => {
+        return accumulator + currentVal;
+    }, 0)
+    return result;
+}
+
+// reverse
+function reverse(arr) {
+    const result = arr.reduce((accumulator, currentVal) => {
+            accumulator.unshift(currentVal);
+            return accumulator;
+    }, [])
+    return result;
+}
