@@ -119,17 +119,17 @@ function filter3(array, callbackFunction) {
 
 // sum
 function sum(arr) {
-    const result = arr.reduce((accumulator, currentVal) => {
-        return accumulator + currentVal;
+    const result = arr.reduce((firstValueChangeAfterLoop, iRunInData) => {
+        return firstValueChangeAfterLoop + iRunInData;
     }, 0)
     return result;
 }
 
 // reverse
 function reverse(arr) {
-    const result = arr.reduce((accumulator, currentVal) => {
-            accumulator.unshift(currentVal);
-            return accumulator;
+    const result = arr.reduce((firstValueChangeAfterLoop, iRunInData) => {
+        firstValueChangeAfterLoop.unshift(iRunInData);
+        return firstValueChangeAfterLoop;
     }, [])
     return result;
 }
