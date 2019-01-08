@@ -6,7 +6,7 @@ var x = [1, 2];
 empty(x);
 console.log(x);
 // x = [1, 2] ko the thay doi gia tri tham chieu 
-
+// o chi la coppy gia tri cua x, nen thay doi o ko lien quan ji den x
 function swap(a, b) {
     [a, b] = [b, a];
 }
@@ -305,3 +305,73 @@ genH(); // H1
 genH(); // H2
 
 //Ex2.23:
+//Ex2.24:
+function counter(a) {
+    return {
+        up: () => ++ a,
+        down: () => -- a
+    }
+}
+
+var obj = counter(10);
+var up = obj.up;
+var down = obj.down;
+
+up(); // 11
+down(); // 10
+down(); // 9
+up(); // 10
+
+//Ex2.25:
+function revocable(fn) {
+    let lock = true;
+    return {
+        invoke: (a, b) => {
+            if (lock) {
+                return fn(a, b)
+            }
+        },
+        revoke: () => lock = false
+    }
+}
+
+var rev = revocable(add);
+var addRev = rev.invoke;
+
+addRev(3, 4); // 7
+rev.revoke();
+addRev(3, 4); // undefined
+
+//Ex2.26
+function exp(a) {
+    if (typeof(a) === 'number') {
+        return a;
+    } else {
+        return a[0](a[1], a[2]);
+    }
+}
+
+var sae = [mul, 5, 11];
+exp(sae); // 55
+exp(42); // 42
+
+//Ex2.27:
+function exp(a) {
+    if (typeof(a) === 'number') {
+        return a;
+    } else {
+        return a[0](a[1][0](a[1][1][0](a[1][1][1]), a[1][2][0](a[1][2][1])));
+    }
+}
+
+var nae = [
+    Math.sqrt,
+    [ add,
+      [square, 3],
+      [square, 4]
+    ]
+  ];
+  exp(nae); // 5
+
+  
+  
