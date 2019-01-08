@@ -193,21 +193,115 @@ function fromTo(a, b) {
 // ele(); // undefined => index 3 
 
 //Ex2.17:
-function element(array, fn) {
-    let k = fromTo(0, array.length);
+// function element(array, fn) {
+//     let k = fromTo(0, array.length);
+//     return () => {
+//         if (fn === undefined) {
+//             return array[k()];
+//         } else {
+//             return array[fn()];
+//         }
+//     }
+// }
+
+// var ele = element([1, 2, 3, 4]);
+
+// ele(); // 1
+// ele(); // 2
+// ele(); // 3
+// ele(); // 3
+// ele(); // undefined
+
+//Ex2.18:
+function collect(fn, array) {
     return () => {
-        if (fn === undefined) {
-            return array[k()];
-        } else {
-            return array[fn()];
+        let temp = fn();
+        if (temp !== undefined) {
+            array.push(temp);    
+        }
+        return array[temp];
+    }
+}
+
+var array = [];
+var col = collect(fromTo(0, 2), array);
+col(); // 0
+
+//Ex2.19:
+function filter(fn1, fn2) {
+    return () => {
+        let temp = fn1();
+        if (fn2(temp)) {
+            return temp;
         }
     }
 }
 
-var ele = element([1, 2, 3, 4]);
+var fil = filter(fromTo(0, 5),
+  function even(value) {
+    return (value % 2) === 0;
+  });
+fil(); // 0
+fil(); // 0
+fil(); // 2
+fil(); // 4
+fil(); // undefined
 
-ele(); // 1
-ele(); // 2
-ele(); // 3
-ele(); // 3
-ele(); // undefined
+//Ex2.20:
+function concat(fn1, fn2) {
+    return () => {
+        let temp = fn1();
+        if (temp !== undefined) {
+            return temp;
+        } else {
+            temp = fn2();
+            return temp;
+        }
+        return undefined;
+    }
+}
+
+var con = concat(fromTo(0, 3), fromTo(0, 2));
+con(); // 0
+con(); // 1
+con(); // 2
+con(); // 0
+con(); // 1
+con(); // undefined
+
+//Ex2.21:
+function gensymf(a) {
+    let count = 0;
+    return () => {
+        count ++;
+        return a + count;
+    }
+}
+
+var genG = gensymf('G');
+var genH = gensymf('H');
+genG(); // G1
+genG(); // G2
+genH(); // H1
+genH(); // H2
+
+//Ex2.22:
+function gensymff(fn, begin) {
+    return (a) => {
+        let count = begin;
+        return () => {
+            count = fn(count,1);
+            return a + count;
+        }
+    }
+}
+
+var gensymf = gensymff(add, 0);
+var genG = gensymf('G');
+var genH = gensymf('H');
+genG(); // G1
+genG(); // G2
+genH(); // H1
+genH(); // H2
+
+//Ex2.23:
