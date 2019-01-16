@@ -30,7 +30,6 @@ function xoanOc(n) {
             arr[n - 1 - j][i] = num;
             num ++;
         };
-        num --;
     }
     return arr;
 }
