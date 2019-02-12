@@ -8,4 +8,4 @@ function findNumber(str) {
     }
     return index;
 }
-findNumber("AAA");
+findNumber("AA");

@@ -10,10 +10,12 @@ function blueSky(str) {
     let temp = str.length;
     for(let i = str.length - 1; i >= 0; i --) {
         if(str[i] == " ") {
+            rs = rs.trim();
             rs += (" " + str.slice(i, temp).trim());
             temp = i;
         }
         if(i == 0) {
+            rs = rs.trim();
             rs += (" " + str.slice(i, temp).trim());
         }
     }
